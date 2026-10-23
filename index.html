@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Echo Pulse — Neon Memory Game</title>
+  <meta name="description" content="A neon Simon-style memory game built with jQuery and Web Audio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="stage">
+    <header>
+      <h1>ECHO<span>PULSE</span></h1>
+      <p class="status" id="status" aria-live="assertive">Press <kbd>Enter</kbd> or tap Start</p>
+    </header>
+
+    <div class="board" role="group" aria-label="Game pads">
+      <button type="button" class="pad" data-pad="0" aria-label="Cyan pad, key Q"><span>Q</span></button>
+      <button type="button" class="pad" data-pad="1" aria-label="Magenta pad, key W"><span>W</span></button>
+      <button type="button" class="pad" data-pad="2" aria-label="Lime pad, key A"><span>A</span></button>
+      <button type="button" class="pad" data-pad="3" aria-label="Amber pad, key S"><span>S</span></button>
+      <div class="hub">
+        <p class="level-label">LEVEL</p>
+        <p class="level" id="level">—</p>
+        <button type="button" class="start" id="startBtn">START</button>
+      </div>
+    </div>
+
+    <section class="panel">
+      <label class="toggle"><input type="checkbox" id="strict"> <span>Strict mode</span> <small>(one mistake = game over)</small></label>
+      <label class="toggle"><input type="checkbox" id="sound" checked> <span>Sound</span></label>
+      <dl class="scores">
+        <div><dt>Best (normal)</dt><dd id="best-normal">0</dd></div>
+        <div><dt>Best (strict)</dt><dd id="best-strict">0</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="footer">Built with jQuery by <a href="https://github.com/himanshuuem">Himanshu</a> · keys <kbd>Q</kbd> <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd></footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="game.js"></script>
+</body>
+</html>

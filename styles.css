@@ -1,0 +1,124 @@
+:root {
+  --bg: #05060d;
+  --text: #e8ecff;
+  --muted: #7a80a6;
+  --c0: #19e6ff;
+  --c1: #ff2bd6;
+  --c2: #8cff3a;
+  --c3: #ffb11a;
+  --danger: #ff3b5c;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background:
+    radial-gradient(circle at 50% 40%, #141a3a, var(--bg) 65%),
+    var(--bg);
+  color: var(--text);
+  font: 500 16px/1.5 "Rajdhani", system-ui, sans-serif;
+  transition: background .3s;
+}
+body.game-over { animation: shake .4s; background: radial-gradient(circle at 50% 40%, #3a0d18, var(--bg) 65%); }
+
+a { color: var(--c0); }
+
+.stage { width: min(460px, 100%); text-align: center; }
+h1 { margin: 0; font: 800 clamp(2rem, 9vw, 3rem) "Orbitron", sans-serif; letter-spacing: .08em; }
+h1 span { color: var(--c1); text-shadow: 0 0 18px var(--c1); }
+.status { min-height: 1.6em; margin: 8px 0 24px; color: var(--muted); font-size: 1.15rem; letter-spacing: .04em; }
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  aspect-ratio: 1;
+  padding: 14px;
+  border-radius: 50%;
+  background: #0b0d1a;
+  box-shadow: 0 0 0 2px #1d2240, 0 30px 80px rgb(0 0 0 / .6);
+}
+.board.listening .pad { cursor: wait; }
+
+.pad {
+  --c: var(--c0);
+  position: relative;
+  border: 2px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: color-mix(in srgb, var(--c) 12%, #0b0d1a);
+  color: color-mix(in srgb, var(--c) 70%, white);
+  font: 800 1.1rem "Orbitron", sans-serif;
+  cursor: pointer;
+  transition: background-color .12s, box-shadow .12s, transform .08s;
+  touch-action: manipulation;
+}
+.pad span { position: absolute; opacity: .55; }
+.pad[data-pad="0"] { --c: var(--c0); border-radius: 100% 12px 12px 12px; }
+.pad[data-pad="1"] { --c: var(--c1); border-radius: 12px 100% 12px 12px; }
+.pad[data-pad="2"] { --c: var(--c2); border-radius: 12px 12px 12px 100%; }
+.pad[data-pad="3"] { --c: var(--c3); border-radius: 12px 12px 100% 12px; }
+.pad[data-pad="0"] span { left: 30%; top: 30%; }
+.pad[data-pad="1"] span { right: 30%; top: 30%; }
+.pad[data-pad="2"] span { left: 30%; bottom: 30%; }
+.pad[data-pad="3"] span { right: 30%; bottom: 30%; }
+.pad:hover { background: color-mix(in srgb, var(--c) 22%, #0b0d1a); }
+.pad:active { transform: scale(.98); }
+.pad.lit {
+  background: var(--c);
+  color: #05060d;
+  box-shadow: 0 0 40px var(--c), inset 0 0 30px rgb(255 255 255 / .5);
+}
+
+.hub {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 38%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #1d2240, #090b16);
+  box-shadow: 0 0 0 10px #0b0d1a, 0 0 30px rgb(25 230 255 / .15);
+}
+.level-label { margin: 0; color: var(--muted); font: 500 .7rem "Orbitron", sans-serif; letter-spacing: .2em; }
+.level { margin: 0; font: 800 clamp(1.6rem, 7vw, 2.4rem)/1.1 "Orbitron", sans-serif; color: var(--c0); text-shadow: 0 0 14px var(--c0); }
+.start {
+  margin-top: 6px;
+  padding: 4px 14px;
+  border: 1px solid var(--c1);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--c1);
+  font: 800 .7rem "Orbitron", sans-serif;
+  letter-spacing: .12em;
+  cursor: pointer;
+}
+.start:hover { background: var(--c1); color: #05060d; }
+
+.panel { display: grid; gap: 10px; margin-top: 28px; padding: 16px; border: 1px solid #1d2240; border-radius: 16px; background: #0b0d1a; text-align: left; }
+.toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.toggle input { accent-color: var(--c1); width: 18px; height: 18px; }
+.toggle small { color: var(--muted); }
+.scores { display: flex; gap: 24px; margin: 6px 0 0; }
+.scores dt { color: var(--muted); font-size: .85rem; }
+.scores dd { margin: 0; font: 800 1.4rem "Orbitron", sans-serif; color: var(--c2); }
+
+kbd { padding: 0 6px; border: 1px solid #2a3060; border-radius: 4px; font: 700 .85em "Orbitron", sans-serif; }
+
+:focus-visible { outline: 2px solid var(--c0); outline-offset: 3px; }
+
+.footer { margin-top: 24px; color: var(--muted); font-size: .9rem; text-align: center; }
+
+@keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
